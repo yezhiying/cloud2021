@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * TODO
  *
@@ -55,5 +57,20 @@ public class PaymentController {
         });
 
         return this.discoveryClient;
+    }
+
+    @GetMapping("/ribbon")
+    public Object getPort(){
+        return this.port;
+    }
+
+    @GetMapping("/timeout")
+    public String timeout(){
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return port;
     }
 }
